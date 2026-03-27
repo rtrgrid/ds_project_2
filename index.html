@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Electricity Forecasting - Transformer System</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(90deg, #1e3a8a, #0ea5e9);
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 { margin: 0; }
+        h2 { color: #38bdf8; }
+        h3 { color: #22c55e; }
+
+        section {
+            padding: 30px;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        td, th {
+            border: 1px solid #334155;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #334155;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .highlight {
+            color: #22c55e;
+            font-weight: bold;
+        }
+
+        .problem {
+            color: #f87171;
+        }
+
+        .solution {
+            color: #60a5fa;
+        }
+
+        .insight {
+            color: #facc15;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>⚡ Electricity Forecasting System</h1>
+    <p>Transformer-based End-to-End ML System (Research → Deployment → Production)</p>
+</header>
+
+<!-- ================= OVERVIEW ================= -->
+
+<section>
+<h2>📌 Project Overview</h2>
+
+<div class="card">
+<p>
+This project extends a basic Transformer model into a <b>production-ready forecasting system</b>.
+It integrates deployment, real-time inference, interpretability, and robustness testing.
+</p>
+
+<ul>
+<li>📊 Time-series forecasting using Transformer</li>
+<li>🚀 ONNX + CoreML deployment</li>
+<li>⚡ Real-time streaming inference</li>
+<li>🔍 Explainability using attention & saliency</li>
+<li>🛡 Robustness under noise & adversarial attacks</li>
+</ul>
+</div>
+</section>
+
+<!-- ================= PERFORMANCE ================= -->
+
+<section>
+<h2>📊 Model Performance</h2>
+
+<div class="card">
+<table>
+<tr><th>Model</th><th>RMSE</th></tr>
+<tr><td>Naive</td><td>13.02</td></tr>
+<tr><td>ARIMA</td><td>5.16</td></tr>
+<tr><td>LSTM</td><td>3.97</td></tr>
+<tr><td class="highlight">Transformer</td><td class="highlight">3.87</td></tr>
+</table>
+
+<p class="insight">
+Transformer achieves the best performance, capturing temporal dependencies effectively.
+</p>
+</div>
+</section>
+
+<!-- ================= TASK 1 ================= -->
+
+<section>
+<h2>🚀 Task 1: Deployment (ONNX + CoreML)</h2>
+
+<div class="card">
+
+<h3>Problem</h3>
+<p class="problem">
+Model cannot run outside PyTorch environment.
+</p>
+
+<h3>Challenges</h3>
+<ul>
+<li>ONNX export failed (missing onnxscript)</li>
+<li>Opset mismatch (LayerNormalization error)</li>
+<li>CoreML requires static input shapes</li>
+</ul>
+
+<h3>Solution</h3>
+<ul class="solution">
+<li>Installed ONNX dependencies</li>
+<li>Used opset ≥ 18</li>
+<li>Fixed input shape (1, 24, 3)</li>
+</ul>
+
+<h3>Results</h3>
+<p>ONNX vs PyTorch diff: <b>2e-07</b> (numerically identical)</p>
+<p>CoreML inference: <span class="highlight">ultra-fast</span></p>
+
+<h3>Insight</h3>
+<p class="insight">
+Deployment requires handling framework constraints beyond model training.
+</p>
+
+</div>
+</section>
+
+<!-- ================= TASK 2 ================= -->
+
+<section>
+<h2>🔍 Task 2: Explainability</h2>
+
+<div class="card">
+
+<h3>Problem</h3>
+<p class="problem">
+Transformer behaves as a black-box model.
+</p>
+
+<h3>Challenges</h3>
+<ul>
+<li>Attention weights not accessible</li>
+<li>Visualization issues in terminal</li>
+</ul>
+
+<h3>Solution</h3>
+<ul class="solution">
+<li>Modified model to store attention weights</li>
+<li>Used Plotly + HTML visualization</li>
+<li>Implemented saliency maps</li>
+</ul>
+
+<h3>Visualization</h3>
+<img src="plots/attention/attention.gif">
+
+<h3>Observations</h3>
+<ul>
+<li>Diagonal attention → accurate predictions</li>
+<li>Scattered attention → poor predictions</li>
+<li>Average attention distance ≈ 11 timesteps</li>
+</ul>
+
+<h3>Insight</h3>
+<p class="insight">
+Model learns meaningful temporal dependencies, validating its decision process.
+</p>
+
+</div>
+</section>
+
+<!-- ================= TASK 3 ================= -->
+
+<section>
+<h2>⚡ Task 3: Streaming Inference</h2>
+
+<div class="card">
+
+<h3>Problem</h3>
+<p class="problem">
+Model designed for batch inference, not real-time systems.
+</p>
+
+<h3>Challenges</h3>
+<ul>
+<li>Input shape mismatch</li>
+<li>Limited dataset</li>
+<li>Memory growth over time</li>
+</ul>
+
+<h3>Solution</h3>
+<ul class="solution">
+<li>Expanded input dimensions</li>
+<li>Simulated streaming data</li>
+<li>Implemented circular buffer</li>
+</ul>
+
+<h3>Results</h3>
+<p>Latency: <span class="highlight">0.43 ms</span></p>
+<p>Throughput: <span class="highlight">2300 predictions/sec</span></p>
+
+<h3>Insight</h3>
+<p class="insight">
+Efficient memory and low latency are essential for real-time ML systems.
+</p>
+
+</div>
+</section>
+
+<!-- ================= TASK 4 ================= -->
+
+<section>
+<h2>🧪 Task 4: Positional Encoding Ablation</h2>
+
+<div class="card">
+
+<h3>Problem</h3>
+<p class="problem">
+Unclear whether positional encoding improves performance.
+</p>
+
+<h3>Results</h3>
+
+<table>
+<tr><th>Encoding</th><th>Performance</th></tr>
+<tr><td>None</td><td class="highlight">Best</td></tr>
+<tr><td>Sinusoidal</td><td>Good</td></tr>
+<tr><td>ALiBi</td><td>Moderate</td></tr>
+<tr><td>Learnable</td><td>Poor</td></tr>
+</table>
+
+<h3>Insight</h3>
+<p class="insight">
+For this dataset, temporal patterns are captured by values alone — positional encoding is not always necessary.
+</p>
+
+</div>
+</section>
+
+<!-- ================= TASK 5 ================= -->
+
+<section>
+<h2>🛡 Task 5: Robustness</h2>
+
+<div class="card">
+
+<h3>Problem</h3>
+<p class="problem">
+Model must remain stable under noisy and adversarial inputs.
+</p>
+
+<h3>Evaluation</h3>
+
+<table>
+<tr><th>Scenario</th><th>RMSE</th></tr>
+<tr><td>Clean</td><td>0.332</td></tr>
+<tr><td>Noise</td><td>0.325</td></tr>
+<tr><td>Missing</td><td>0.327</td></tr>
+<tr><td>FGSM</td><td>0.341</td></tr>
+</table>
+
+<h3>Insight</h3>
+<p class="insight">
+Model is highly robust with minimal performance degradation.
+</p>
+
+</div>
+</section>
+
+<!-- ================= FINAL ================= -->
+
+<section>
+<h2>🏁 Final Conclusion</h2>
+
+<div class="card">
+
+<p>
+This project transforms a basic Transformer into a <b>complete ML system</b>:
+</p>
+
+<ul>
+<li>✔ Deployment-ready</li>
+<li>✔ Real-time capable</li>
+<li>✔ Interpretable</li>
+<li>✔ Robust</li>
+</ul>
+
+<p class="highlight">
+End-to-End Pipeline: Research → Deployment → Monitoring
+</p>
+
+</div>
+</section>
+
+</body>
+</html>

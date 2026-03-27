@@ -1,0 +1,11 @@
+venv/
+coreml_env/
+__pycache__/
+*.pyc
+*.pth
+*.onnx
+*.mlmodel
+outputs/
+# models/
+.DS_Store
+/gitignore
